@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        div {
+            position: absolute;
+            top: 35%;
+            bottom: 65%;
+            text-align: center;
+            align-content: center;
+            width: 100%;
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        input[type=text] {
+            padding: 10px 15px;
+            font-size: 20px;
+            width: 500px;
+            height: 50px;
+        }
+
+        input[type=submit] {
+            height: 50px;
+            padding: 0 20px;
+            border: none;
+            background-color: green;
+            color: rgb(192, 77, 202);
+            font-weight: bold;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+    <title>URL SHORTENER</title>
+</head>
+<body>
+    <div>
+        <form action="{% url 'shortener:short'%}" method="post">
+            {% csrf_token %}
+           <input type="text" name="url" placeholder="Enter the long url you want to shorten">
+           <input type="submit" value="Shorten url" />
+        </form>
+
+        {% if shortURL %}
+        <footer>
+            Shortened URL: <h>http://{{ request.META.HTTP_HOST }}/{{shortURL}}</h>
+        </footer>
+        {% endif %}
+    </div>
+</body>
+</html>
